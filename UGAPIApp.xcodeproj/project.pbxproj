@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF0098891637D06600FE8924 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0098881637D06600FE8924 /* JSONKit.m */; };
+		AF0098891637D06600FE8924 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0098881637D06600FE8924 /* JSONKit.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
 		E89D6CA1150E5B2E005F5FB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89D6CA0150E5B2E005F5FB9 /* UIKit.framework */; };
 		E89D6CA3150E5B2E005F5FB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89D6CA2150E5B2E005F5FB9 /* Foundation.framework */; };
 		E89D6CA5150E5B2E005F5FB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89D6CA4150E5B2E005F5FB9 /* CoreGraphics.framework */; };
@@ -119,7 +119,6 @@
 		E89D6C91150E5B2E005F5FB9 = {
 			isa = PBXGroup;
 			children = (
-				E89D6D18150E5C54005F5FB9 /* CoreLocation.framework */,
 				E89D6CDC150E5B99005F5FB9 /* UGAPI */,
 				E89D6CA6150E5B2E005F5FB9 /* UGAPIApp */,
 				E89D6CC7150E5B2E005F5FB9 /* UGAPIAppTests */,
@@ -141,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				AF0098861637D05B00FE8924 /* JSONKIT */,
+				E89D6D18150E5C54005F5FB9 /* CoreLocation.framework */,
 				E89D6CA0150E5B2E005F5FB9 /* UIKit.framework */,
 				E89D6CA2150E5B2E005F5FB9 /* Foundation.framework */,
 				E89D6CA4150E5B2E005F5FB9 /* CoreGraphics.framework */,

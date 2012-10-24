@@ -3,7 +3,7 @@
 // all transaction IDs are unique across all UGHTTPManagers. 
 // this global increases every time there's an asynchronous 
 // transaction. 
-static int g_nextTransactionID = 1;  
+static NSInteger g_nextTransactionID = 1;
 
 // a mutex to protect against multiple threads getting
 // IDs at the same time, and possibly getting the same ID
@@ -17,13 +17,13 @@ NSRecursiveLock *g_transactionIDLock = nil;
     NSMutableData *m_receivedData;
     
     // a general error string
-    NSString *m_lastError;
+    NSError *m_lastError;
     
     // the delegate sent in to the asynch method
     id m_delegate;
     
     // the transaction ID of the current (or most recent) transaction
-    int m_transactionID;
+    NSInteger m_transactionID;
     
     // availability of this instance. Managed by UGClient
     BOOL m_bAvailable;
@@ -41,7 +41,7 @@ NSRecursiveLock *g_transactionIDLock = nil;
     self = [super init];
     if ( self )
     {
-        m_lastError = @"No error";
+        m_lastError = nil;
         m_receivedData = [NSMutableData data];
         m_bAvailable = YES;
         m_delegateLock = [NSRecursiveLock new];
@@ -62,18 +62,18 @@ NSRecursiveLock *g_transactionIDLock = nil;
     m_auth = auth;
 }
 
--(NSString *)getLastError
+-(NSError *)getLastError
 {
     return m_lastError;
 }
 
--(int)getNextTransactionID
+-(NSInteger)getNextTransactionID
 {
     // make sure we can use this lock
     assert(g_transactionIDLock);
     
     [g_transactionIDLock lock];
-    int ret = g_nextTransactionID++;
+    NSInteger ret = g_nextTransactionID++;
     [g_transactionIDLock unlock];
     
     return ret;
@@ -86,14 +86,14 @@ NSRecursiveLock *g_transactionIDLock = nil;
 
 
 //----------------------- SYNCHRONOUS CALLING ------------------------
--(NSString *)syncTransaction:(NSString *)url operation:(int)op operationData:(NSString *)opData;
+-(NSData *)syncTransaction:(NSString *)url operation:(NSInteger)op operationData:(NSString *)opData;
 {
     // clear the transaction ID
     m_transactionID = -1;
     
     // use the synchronous funcitonality of NSURLConnection
     // clear the error
-    m_lastError = @"No error";
+    m_lastError = nil;
     
     // formulate the request
     NSURLRequest *req = [self getRequest:url operation:op operationData:opData];
@@ -105,28 +105,31 @@ NSRecursiveLock *g_transactionIDLock = nil;
     if ( resultData )
     {
         // we got results
-        NSString *resultString = [[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding];        
-        return resultString;
+        //NSString *resultString = [[NSString alloc] initWithData:resultData encoding:NSUTF8StringEncoding];
+        return resultData;
     }
     
     // if we're here, it means we got nil as the result
-    m_lastError = [error localizedDescription];
+    m_lastError = error;;
     return nil;
 }
 
 //----------------------- ASYNCHRONOUS CALLING ------------------------
--(int)asyncTransaction:(NSString *)url operation:(int)op operationData:(NSString *)opData delegate:(id)delegate;
+-(NSInteger)asyncTransaction:(NSString *)url operation:(NSInteger)op operationData:(NSString *)opData delegate:(id)delegate;
 {
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    
     // clear the transaction ID
     m_transactionID = -1;
     
     // clear the error
-    m_lastError = @"No error";
+    m_lastError = nil;
     
     if ( !delegate )
     {
         // an asynch transaction with no delegate has no meaning
-        m_lastError = @"Delegate was nil";
+        m_lastError = [NSError errorWithDomain:@"UGClientErrorDomain" code:kUGHTTPErrorDomainDelegate userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"There is no delegate", NSLocalizedDescriptionKey, nil]];
         return -1;
     }
     
@@ -134,12 +137,14 @@ NSRecursiveLock *g_transactionIDLock = nil;
     // are required
     if ( ![delegate respondsToSelector:@selector(httpManagerError:error:)] )
     {
-        m_lastError = @"Delegate does not have httpManagerError:error: method";
+        m_lastError = [NSError errorWithDomain:@"UGClientErrorDomain" code:kUGHTTPErrorDomainFailedSelector userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Delegate does not have httpManagerError:error: method", NSLocalizedDescriptionKey, nil]];
+        
         return -1;
     }
     if ( ![delegate respondsToSelector:@selector(httpManagerResponse:response:)] )
     {
-        m_lastError = @"Delegate does not have httpManagerResponse:response: method";
+        m_lastError = [NSError errorWithDomain:@"UGClientErrorDomain" code:kUGHTTPErrorDomainSucceedSelector userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Delegate does not have httpManagerResponse:response: method", NSLocalizedDescriptionKey, nil]];
+        
         return -1;
     }
     
@@ -161,7 +166,7 @@ NSRecursiveLock *g_transactionIDLock = nil;
     if ( !conn )
     {
         // failed to connect
-        m_lastError = @"Unable to initiate connection.";
+        m_lastError = [NSError errorWithDomain:@"UGClientErrorDomain" code:kUGHTTPErrorDomainConnection userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Can't connection", NSLocalizedDescriptionKey, nil]];
         return -1;       
     }
     
@@ -212,6 +217,7 @@ NSRecursiveLock *g_transactionIDLock = nil;
         
     NSMutableURLRequest *req = [NSMutableURLRequest new];
     [req setURL:nsurl];
+    [req setTimeoutInterval:10.0f];
     
     switch ( op ) 
     {
@@ -234,7 +240,7 @@ NSRecursiveLock *g_transactionIDLock = nil;
     if ( opStr )
     {
         // prep the post data
-        NSData *opData = [opStr dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSData *opData = [opStr dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
         
         // make a string that tells the length of the post data. We'll need that for the HTTP header setup
         NSString *opLength = [NSString stringWithFormat:@"%d", [opData length]];
@@ -276,8 +282,11 @@ NSRecursiveLock *g_transactionIDLock = nil;
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
      // connection failed. Note the error
-    m_lastError = [error localizedDescription];
+    m_lastError = error;
     
     // send the error to the delegate. We wrap this in 
     // send the result to the delegate.
@@ -294,15 +303,18 @@ NSRecursiveLock *g_transactionIDLock = nil;
 
 -(void)connectionDidFinishLoading:(NSURLConnection*)connection
 {
+    
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    
     // all done. Let's turn it in to a string
-    NSString *resultString = [[NSString alloc] initWithData:m_receivedData encoding:NSUTF8StringEncoding];
+    //NSString *resultString = [[NSString alloc] initWithData:m_receivedData encoding:NSUTF8StringEncoding];
     
     // send it to the delegate. See connection:didFailWithError: for an explanation
     // of the mutex locks
     [m_delegateLock lock];
     if ( m_delegate )
     {
-        [m_delegate performSelector:@selector(httpManagerResponse:response:) withObject:self withObject:resultString];   
+        [m_delegate performSelector:@selector(httpManagerResponse:response:) withObject:self withObject:m_receivedData];
     }
     m_delegate = nil;
     [m_delegateLock unlock];

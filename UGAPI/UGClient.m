@@ -1,6 +1,6 @@
 #import "UGClient.h"
 #import "UGHTTPManager.h"
-#import "SBJson.h"
+#import "JSONKit.h"
 #import "UGMultiStepAction.h"
 
 NSString *g_deviceUUID = nil;
@@ -199,7 +199,7 @@ NSString *g_deviceUUID = nil;
 // url: the URL to hit
 // op: a kUGHTTP constant. Example: kUGHTTPPost
 // opData: The data to send along with the operation. Can be nil
--(UGClientResponse *)httpTransaction:(NSString *)url op:(int)op opData:(NSString *)opData
+-(UGClientResponse *)httpTransaction:(NSString *)url op:(NSInteger)op opData:(NSString *)opData
 {
     // get an http manager to do this transaction
     UGHTTPManager *mgr = [self getHTTPManager];
@@ -213,7 +213,7 @@ NSString *g_deviceUUID = nil;
         }
         
         // asynch transaction
-        int transactionID = [mgr asyncTransaction:url operation:op operationData:opData delegate:self];
+        NSInteger transactionID = [mgr asyncTransaction:url operation:op operationData:opData delegate:self];
         
         if ( m_bLogging )
         {
@@ -244,7 +244,7 @@ NSString *g_deviceUUID = nil;
             UGClientResponse *response = [UGClientResponse new];
             [response setTransactionID:transactionID];
             [response setTransactionState:kUGClientResponsePending];
-            [response setResponse:nil];
+            [response setResponse:[mgr getLastError]];
             [response setRawResponse:nil];
             return response;
         }
@@ -254,12 +254,12 @@ NSString *g_deviceUUID = nil;
         if ( m_bLogging )
         {
             NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-            NSLog(@"Synch outgoing call: '%@'", url);
+            NSLog(@"Synch outgoing call: '%@', opdata : %@", url, opData);
             NSLog(@">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n\n");
         }
         
         // synch transaction
-        NSString *result = [mgr syncTransaction:url operation:op operationData:opData];
+        NSData *result = [mgr syncTransaction:url operation:op operationData:opData];
         
         if ( m_bLogging )
         {
@@ -281,12 +281,12 @@ NSString *g_deviceUUID = nil;
         if ( result )
         {
             // got a valid result
-            UGClientResponse *response = [self createResponse:-1 jsonStr:result];
+            UGClientResponse *response = [self createResponse:-1 jsonData:result];
             return response;
         }
         else 
         {
-            // there was an error. Note the failure state, set the response to 
+            // there was an error. Note the failure state, set the response to
             // be the error string
             UGClientResponse *response = [UGClientResponse new];
             [response setTransactionID:-1];
@@ -298,18 +298,21 @@ NSString *g_deviceUUID = nil;
     }
 }
 
--(UGClientResponse *)createResponse:(int)transactionID jsonStr:(NSString *)jsonStr
+-(UGClientResponse *)createResponse:(NSInteger)transactionID jsonData:(NSData *)jsonData
 {
     UGClientResponse *response = [UGClientResponse new];
     
     // set the raw response and transaction id
-    [response setRawResponse:jsonStr];
+    
+    JSONDecoder *decorder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionStrict];
+    id object = [decorder objectWithData:jsonData];
+    [response setRawResponse:object];
+    
     [response setTransactionID:transactionID];
     
-    // parse the json
-    SBJsonParser *parser = [SBJsonParser new];
+    
     NSError *error;
-    id result = [parser objectWithString:jsonStr error:&error];
+    id result = [decorder objectWithData:jsonData error:&error];//[parser objectWithString:jsonStr error:&error];
     
     if ( result )
     {
@@ -427,9 +430,9 @@ NSString *g_deviceUUID = nil;
 
 -(NSString *)createJSON:(NSDictionary *)data error:(NSString **)error
 {
-    SBJsonWriter *writer = [SBJsonWriter new];
+    //SBJsonWriter *writer = [SBJsonWriter new];
     NSError *jsonError;
-    NSString *jsonStr = [writer stringWithObject:data error:&jsonError];
+    NSString *jsonStr = [data JSONStringWithOptions:JKSerializeOptionNone error:&jsonError];//[writer stringWithObject:data error:&jsonError];
 
     if ( jsonStr )
     {
@@ -476,7 +479,7 @@ NSString *g_deviceUUID = nil;
     [self releaseHTTPManager:manager];
 }
 
--(void)httpManagerResponse:(UGHTTPManager *)manager response:(NSString *)response
+-(void)httpManagerResponse:(UGHTTPManager *)manager response:(NSData *)response
 {
     if ( m_bLogging )
     {
@@ -486,7 +489,7 @@ NSString *g_deviceUUID = nil;
     }
     
     // form up the response
-    UGClientResponse *ugResponse = [self createResponse:[manager getTransactionID] jsonStr:response];
+    UGClientResponse *ugResponse = [self createResponse:[manager getTransactionID] jsonData:response];
     
     // if this is part of a multi-step call, we press on.
     for ( int i=0 ; i<[m_pendingMultiStepActions count] ; i++ )
@@ -767,9 +770,13 @@ NSString *g_deviceUUID = nil;
     // to work. Therefore we can't use our internal convenience 
     // function for making the json. We go straight to SBJson, so
     // we can identify and report any errors.
-    SBJsonWriter *writer = [SBJsonWriter new];
+
     NSError *jsonError;
-    NSString *toPostStr = [writer stringWithObject:activity error:&jsonError];
+    NSString *toPostStr = [activity JSONStringWithOptions:JKSerializeOptionNone error:&jsonError];
+
+    //SBJsonWriter *writer = [SBJsonWriter new];
+    //NSError *jsonError;
+    //NSString *toPostStr = [writer stringWithObject:activity error:&jsonError];
 
     if ( !toPostStr )
     {
@@ -936,9 +943,10 @@ NSString *g_deviceUUID = nil;
     }
     
     // make sure it can parse to a json
-    SBJsonWriter *writer = [SBJsonWriter new];
+    //SBJsonWriter *writer = [SBJsonWriter new];
     NSError *jsonError;
-    *jsonStr = [writer stringWithObject:newEntity error:&jsonError];
+    *jsonStr = [newEntity JSONStringWithOptions:JKSerializeOptionNone error:&jsonError];
+    //*jsonStr = [writer stringWithObject:newEntity error:&jsonError];
     if ( !*jsonStr )
     {
         error = [jsonError localizedDescription];

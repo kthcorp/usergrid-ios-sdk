@@ -25,9 +25,9 @@ enum
 @property int nextAction;
 
 // data necessary for subsequent steps
-@property NSString *userID; 
-@property NSString *groupID; 
-@property NSDictionary *activity; 
+@property (nonatomic, retain) NSString *userID;
+@property (nonatomic, retain)  NSString *groupID; 
+@property (nonatomic, retain)  NSDictionary *activity; 
 
 // the transactionID that will be sent to the user.
 // This is distinct from normal transaction IDs,

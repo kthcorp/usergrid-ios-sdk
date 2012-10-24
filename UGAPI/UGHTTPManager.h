@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 enum
 {
     kUGHTTPGet = 0,
@@ -9,13 +9,22 @@ enum
     kUGHTTPDelete = 4
 };
 
+typedef enum
+{
+    kUGHTTPErrorDomainDelegate = 800,
+    kUGHTTPErrorDomainSucceedSelector = 801,
+    kUGHTTPErrorDomainFailedSelector = 802,
+    kUGHTTPErrorDomainConnection = 803,
+}kUGHTTPErrorDomain;
+
+
 @interface UGHTTPManager : NSObject
 
 // blocks until a response is received, or until there's an error.
 // in the event of a response, it's returned. If there's an error, 
 // the funciton returns nil and you can call getLastError to see what
 // went wrong.
--(NSString *)syncTransaction:(NSString *)url operation:(int)op operationData:(NSString *)opData;
+-(NSData *)syncTransaction:(NSString *)url operation:(int)op operationData:(NSString *)opData;
 
 // sets up the transaction asynchronously. The delegate that's sent in
 // must have the following functions: 
@@ -26,10 +35,10 @@ enum
 // In all cases, it returns a transaction ID. A return value
 // of -1 means there was an error.
 // You can call getLastError to find out what went wrong. 
--(int)asyncTransaction:(NSString *)url operation:(int)op operationData:(NSString *)opData delegate:(id)delegate;
+-(NSInteger)asyncTransaction:(NSString *)url operation:(NSInteger)op operationData:(NSString *)opData delegate:(id)delegate;
 
 // get the current transactionID
--(int)getTransactionID;
+-(NSInteger)getTransactionID;
 
 // sets the auth key
 -(void)setAuth: (NSString *)auth;

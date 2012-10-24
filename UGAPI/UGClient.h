@@ -66,7 +66,7 @@ set the response limit in UGQuery as well.
 // Setting the delegate to nil puts the API in to synchronous mode.
 -(BOOL) setDelegate:(id)delegate;
 
-
+-(void)setAuth:(NSString *)auth;
 /********************* LOGIN / LOGOUT *********************/
 // log in with the given username and password
 -(UGClientResponse *)logInUser: (NSString *)userName password:(NSString *)password;

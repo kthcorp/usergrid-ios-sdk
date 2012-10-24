@@ -2,9 +2,9 @@
 
 @interface UGUser : NSObject
 
-@property NSString *username;
-@property NSString *email;
-@property NSString *uuid;
-@property NSString *picture;
+@property (nonatomic, retain) NSString *username;
+@property (nonatomic, retain) NSString *email;
+@property (nonatomic, retain) NSString *uuid;
+@property (nonatomic, retain) NSString *picture;
 
 @end
