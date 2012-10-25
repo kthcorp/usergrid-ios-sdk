@@ -8,6 +8,31 @@
 
 /* Begin PBXBuildFile section */
 		AF0098891637D06600FE8924 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0098881637D06600FE8924 /* JSONKit.m */; settings = {COMPILER_FLAGS = " -fno-objc-arc"; }; };
+		AF6C66291638E5BF00776F91 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89D6CA2150E5B2E005F5FB9 /* Foundation.framework */; };
+		AF6C66351638E5DC00776F91 /* UGActivity.h in Sources */ = {isa = PBXBuildFile; fileRef = E89D6CF7150E5B99005F5FB9 /* UGActivity.h */; };
+		AF6C66361638E5DC00776F91 /* UGActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = E89D6CF8150E5B99005F5FB9 /* UGActivity.m */; };
+		AF6C66371638E5DC00776F91 /* UGClient.h in Sources */ = {isa = PBXBuildFile; fileRef = E89D6CF9150E5B99005F5FB9 /* UGClient.h */; };
+		AF6C66381638E5DC00776F91 /* UGClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E89D6CFA150E5B99005F5FB9 /* UGClient.m */; };
+		AF6C66391638E5DC00776F91 /* UGClientResponse.h in Sources */ = {isa = PBXBuildFile; fileRef = E89D6CFB150E5B99005F5FB9 /* UGClientResponse.h */; };
+		AF6C663A1638E5DC00776F91 /* UGClientResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = E89D6CFC150E5B99005F5FB9 /* UGClientResponse.m */; };
+		AF6C663B1638E5DC00776F91 /* UGHTTPManager.h in Sources */ = {isa = PBXBuildFile; fileRef = E89D6CFD150E5B99005F5FB9 /* UGHTTPManager.h */; };
+		AF6C663C1638E5DC00776F91 /* UGHTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E89D6CFE150E5B99005F5FB9 /* UGHTTPManager.m */; };
+		AF6C663D1638E5DC00776F91 /* UGMultiStepAction.h in Sources */ = {isa = PBXBuildFile; fileRef = E89D6CFF150E5B99005F5FB9 /* UGMultiStepAction.h */; };
+		AF6C663E1638E5DC00776F91 /* UGMultiStepAction.m in Sources */ = {isa = PBXBuildFile; fileRef = E89D6D00150E5B99005F5FB9 /* UGMultiStepAction.m */; };
+		AF6C663F1638E5DC00776F91 /* UGQuery.h in Sources */ = {isa = PBXBuildFile; fileRef = E89D6D01150E5B99005F5FB9 /* UGQuery.h */; };
+		AF6C66401638E5DC00776F91 /* UGQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = E89D6D02150E5B99005F5FB9 /* UGQuery.m */; };
+		AF6C66411638E5DC00776F91 /* UGUser.h in Sources */ = {isa = PBXBuildFile; fileRef = E89D6D03150E5B99005F5FB9 /* UGUser.h */; };
+		AF6C66421638E5DC00776F91 /* UGUser.m in Sources */ = {isa = PBXBuildFile; fileRef = E89D6D04150E5B99005F5FB9 /* UGUser.m */; };
+		AF6C66431638E5E800776F91 /* UGActivity.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E89D6CF7150E5B99005F5FB9 /* UGActivity.h */; };
+		AF6C66441638E5E800776F91 /* UGClient.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E89D6CF9150E5B99005F5FB9 /* UGClient.h */; };
+		AF6C66451638E5E800776F91 /* UGClientResponse.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E89D6CFB150E5B99005F5FB9 /* UGClientResponse.h */; };
+		AF6C66461638E5E800776F91 /* UGHTTPManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E89D6CFD150E5B99005F5FB9 /* UGHTTPManager.h */; };
+		AF6C66471638E5E800776F91 /* UGMultiStepAction.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E89D6CFF150E5B99005F5FB9 /* UGMultiStepAction.h */; };
+		AF6C66481638E5E800776F91 /* UGQuery.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E89D6D01150E5B99005F5FB9 /* UGQuery.h */; };
+		AF6C66491638E5E800776F91 /* UGUser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E89D6D03150E5B99005F5FB9 /* UGUser.h */; };
+		AF6C664C1638E68100776F91 /* JSONKit.h in Sources */ = {isa = PBXBuildFile; fileRef = AF0098871637D06600FE8924 /* JSONKit.h */; };
+		AF6C664D1638E68100776F91 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AF0098881637D06600FE8924 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AF6C66581638E79300776F91 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89D6CA0150E5B2E005F5FB9 /* UIKit.framework */; };
 		E89D6CA1150E5B2E005F5FB9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89D6CA0150E5B2E005F5FB9 /* UIKit.framework */; };
 		E89D6CA3150E5B2E005F5FB9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89D6CA2150E5B2E005F5FB9 /* Foundation.framework */; };
 		E89D6CA5150E5B2E005F5FB9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89D6CA4150E5B2E005F5FB9 /* CoreGraphics.framework */; };
@@ -42,9 +67,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AF6C66261638E5BF00776F91 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+				AF6C66431638E5E800776F91 /* UGActivity.h in CopyFiles */,
+				AF6C66441638E5E800776F91 /* UGClient.h in CopyFiles */,
+				AF6C66451638E5E800776F91 /* UGClientResponse.h in CopyFiles */,
+				AF6C66461638E5E800776F91 /* UGHTTPManager.h in CopyFiles */,
+				AF6C66471638E5E800776F91 /* UGMultiStepAction.h in CopyFiles */,
+				AF6C66481638E5E800776F91 /* UGQuery.h in CopyFiles */,
+				AF6C66491638E5E800776F91 /* UGUser.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		AF0098871637D06600FE8924 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		AF0098881637D06600FE8924 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
+		AF6C66281638E5BF00776F91 /* libUGAPI_Library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUGAPI_Library.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89D6C9C150E5B2E005F5FB9 /* UGAPIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UGAPIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89D6CA0150E5B2E005F5FB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E89D6CA2150E5B2E005F5FB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -83,6 +128,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		AF6C66251638E5BF00776F91 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF6C66581638E79300776F91 /* UIKit.framework in Frameworks */,
+				AF6C66291638E5BF00776F91 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E89D6C99150E5B2E005F5FB9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -132,6 +186,7 @@
 			children = (
 				E89D6C9C150E5B2E005F5FB9 /* UGAPIApp.app */,
 				E89D6CC0150E5B2E005F5FB9 /* UGAPIAppTests.octest */,
+				AF6C66281638E5BF00776F91 /* libUGAPI_Library.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -217,6 +272,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		AF6C66271638E5BF00776F91 /* UGAPI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AF6C66331638E5BF00776F91 /* Build configuration list for PBXNativeTarget "UGAPI" */;
+			buildPhases = (
+				AF6C66241638E5BF00776F91 /* Sources */,
+				AF6C66251638E5BF00776F91 /* Frameworks */,
+				AF6C66261638E5BF00776F91 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UGAPI;
+			productName = UGAPI_Library;
+			productReference = AF6C66281638E5BF00776F91 /* libUGAPI_Library.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		E89D6C9B150E5B2E005F5FB9 /* UGAPIApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E89D6CD2150E5B2E005F5FB9 /* Build configuration list for PBXNativeTarget "UGAPIApp" */;
@@ -276,6 +348,7 @@
 			targets = (
 				E89D6C9B150E5B2E005F5FB9 /* UGAPIApp */,
 				E89D6CBF150E5B2E005F5FB9 /* UGAPIAppTests */,
+				AF6C66271638E5BF00776F91 /* UGAPI */,
 			);
 		};
 /* End PBXProject section */
@@ -318,6 +391,29 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		AF6C66241638E5BF00776F91 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AF6C664C1638E68100776F91 /* JSONKit.h in Sources */,
+				AF6C664D1638E68100776F91 /* JSONKit.m in Sources */,
+				AF6C66351638E5DC00776F91 /* UGActivity.h in Sources */,
+				AF6C66361638E5DC00776F91 /* UGActivity.m in Sources */,
+				AF6C66371638E5DC00776F91 /* UGClient.h in Sources */,
+				AF6C66381638E5DC00776F91 /* UGClient.m in Sources */,
+				AF6C66391638E5DC00776F91 /* UGClientResponse.h in Sources */,
+				AF6C663A1638E5DC00776F91 /* UGClientResponse.m in Sources */,
+				AF6C663B1638E5DC00776F91 /* UGHTTPManager.h in Sources */,
+				AF6C663C1638E5DC00776F91 /* UGHTTPManager.m in Sources */,
+				AF6C663D1638E5DC00776F91 /* UGMultiStepAction.h in Sources */,
+				AF6C663E1638E5DC00776F91 /* UGMultiStepAction.m in Sources */,
+				AF6C663F1638E5DC00776F91 /* UGQuery.h in Sources */,
+				AF6C66401638E5DC00776F91 /* UGQuery.m in Sources */,
+				AF6C66411638E5DC00776F91 /* UGUser.h in Sources */,
+				AF6C66421638E5DC00776F91 /* UGUser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E89D6C98150E5B2E005F5FB9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -390,6 +486,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		AF6C66311638E5BF00776F91 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DSTROOT = /tmp/UGAPI_Library.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UGAPIApp/UGAPIApp-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AF6C66321638E5BF00776F91 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				DSTROOT = /tmp/UGAPI_Library.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UGAPIApp/UGAPIApp-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		E89D6CD0150E5B2E005F5FB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -496,6 +627,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		AF6C66331638E5BF00776F91 /* Build configuration list for PBXNativeTarget "UGAPI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AF6C66311638E5BF00776F91 /* Debug */,
+				AF6C66321638E5BF00776F91 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		E89D6C96150E5B2E005F5FB9 /* Build configuration list for PBXProject "UGAPIApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
