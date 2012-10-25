@@ -71,7 +71,7 @@
 		AF6C66261638E5BF00776F91 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "${PRODUCT_NAME}";
+			dstPath = include;
 			dstSubfolderSpec = 16;
 			files = (
 				AF6C66431638E5E800776F91 /* UGActivity.h in CopyFiles */,
@@ -89,7 +89,7 @@
 /* Begin PBXFileReference section */
 		AF0098871637D06600FE8924 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = submodules/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		AF0098881637D06600FE8924 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = submodules/JSONKit/JSONKit.m; sourceTree = "<group>"; };
-		AF6C66281638E5BF00776F91 /* libUGAPI_Library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUGAPI_Library.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF6C66281638E5BF00776F91 /* libUGAPI_Library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libUGAPI_Library.a; path = libUGAPI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89D6C9C150E5B2E005F5FB9 /* UGAPIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UGAPIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89D6CA0150E5B2E005F5FB9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E89D6CA2150E5B2E005F5FB9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -634,6 +634,7 @@
 				AF6C66321638E5BF00776F91 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E89D6C96150E5B2E005F5FB9 /* Build configuration list for PBXProject "UGAPIApp" */ = {
 			isa = XCConfigurationList;
