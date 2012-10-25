@@ -1099,6 +1099,7 @@ NSString *g_deviceUUID = nil;
     
     // convert it to a usable string. Make our own copy.
     g_deviceUUID = [NSString stringWithString:(__bridge NSString *)uuidStringRef];
+    CFRelease(uuidStringRef);
     if ( !g_deviceUUID ) return nil;
 
     // store it
